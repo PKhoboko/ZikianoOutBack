@@ -28,6 +28,12 @@
     header{display:flex;align-items:center;justify-content:space-between;gap:18px}
     .brand{display:flex;align-items:center;gap:14px}
     .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#f8a170);display:grid;place-items:center;font-weight:800;color:#081224}
+    .logo img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        border-radius: 12px;
+      }
     .brand h1{margin:0;font-size:20px;letter-spacing:0.6px}
     nav{display:flex;gap:12px;align-items:center}
     .nav-btn{padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
@@ -81,7 +87,9 @@
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo">LS</div>
+        <div class="logo">
+        <img src="images/IMG-20251110-WA0007.jpg" alt="Zikiano OutBack Logo">
+      </div>
         <div>
           <h1>Zikiano OutBack</h1>
           <div class="muted">Premium shoes — for comfortable wear</div>
@@ -146,7 +154,7 @@
               </div>
 
               <div style="display:flex;gap:12px;align-items:center">
-                <div style="width:64px;height:64px;border-radius:10px;background:url('https://images.unsplash.com/photo-1528701800489-4760a2b7b1d0?w=800&q=80') center/cover"></div>
+                <div style="width:64px;height:64px;border-radius:10px;background:url('images/IMG-20251110-WA0009.jpg') center/cover"></div>
                 <div>
                   <div style="font-weight:700">Nero Loafer</div>
                   <div class="muted">R2,199</div>
@@ -190,15 +198,30 @@
   <script>
     // Demo data
     const products = [
-      {id:1,name:'Carbon Runner',price:1499,tag:'sneakers',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1400&q=80',desc:'Lightweight runner with breathable upper.'},
-      {id:2,name:'Nero Loafer',price:2199,tag:'leather',img:'https://images.unsplash.com/photo-1528701800489-4760a2b7b1d0?w=1400&q=80',desc:'Classic leather loafers for formal settings.'},
-      {id:3,name:'Sky High',price:1899,tag:'sneakers',img:'https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?w=1400&q=80',desc:'Bold midsole and premium cushioning.'},
-      {id:4,name:'Trailblaze',price:1299,tag:'sport',img:'https://images.unsplash.com/photo-1542293787938-c9e299b8808a?w=1400&q=80',desc:'Rugged sole for outdoor adventures.'},
-      {id:5,name:'Velvet Step',price:1799,tag:'leather',img:'https://images.unsplash.com/photo-1520975910963-8d5a6f5a6e7b?w=1400&q=80',desc:'Soft lining for everyday comfort.'},
-      {id:6,name:'Urban Glide',price:1599,tag:'sneakers',img:'https://images.unsplash.com/photo-1539185441755-769473a23570?w=1400&q=80',desc:'Sleek silhouette for city life.'},
-      {id:7,name:'Sprint Pro',price:1399,tag:'sport',img:'https://images.unsplash.com/photo-1528701800489-4760a2b7b1d0?w=1400&q=80',desc:'Engineered for speed.'},
-      {id:8,name:'Classic Oxford',price:2499,tag:'leather',img:'https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?w=1400&q=80',desc:'Timeless craftsmanship.'},
-      {id:9,name:'Comfy Slip',price:999,tag:'sneakers',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1400&q=80',desc:'Slip-on convenience with arch support.'}
+      {id:1,name:'Carbon Runner',price:1499,tag:'sneakers',img:'images/IMG-20251110-WA00010.jpg',desc:'Lightweight runner with breathable upper.'},
+      {id:2,name:'Nero Loafer',price:2199,tag:'leather',img:'images/IMG-20251110-WA00011.jpg',desc:'Classic leather loafers for formal settings.'},
+      {id:3,name:'Sky High',price:1899,tag:'sneakers',img:'images/IMG-20251110-WA00012.jpg',desc:'Bold midsole and premium cushioning.'},
+      {id:4,name:'Trailblaze',price:1299,tag:'sport',img:'images/IMG-20251110-WA00013.jpg',desc:'Rugged sole for outdoor adventures.'},
+      {id:5,name:'Velvet Step',price:1799,tag:'leather',img:'images/IMG-20251110-WA00014.jpg',desc:'Soft lining for everyday comfort.'},
+      {id:6,name:'Urban Glide',price:1599,tag:'sneakers',img:'images/IMG-20251110-WA00015.jpg',desc:'Sleek silhouette for city life.'},
+      {id:7,name:'Sprint Pro',price:1399,tag:'sport',img:'images/IMG-20251110-WA00016.jpg',desc:'Engineered for speed.'},
+      {id:8,name:'Classic Oxford',price:2499,tag:'leather',img:'images/IMG-20251110-WA0009.jpg',desc:'Timeless craftsmanship.'},
+      {id:9,name:'Comfy Slip',price:999,tag:'sneakers',img:'images/IMG-20251110-WA00017.jpg',desc:'Slip-on convenience with arch support.'}
+      {id:10,name:'Comfy Slip',price:999,tag:'sneakers',img:'images/IMG-20251110-WA00018.jpg',desc:'Slip-on convenience with arch support.'}
+
+     {id:11,name:'Carbon Runner',price:1499,tag:'sneakers',img:'images/IMG-20251110-WA00019.jpg',desc:'Lightweight runner with breathable upper.'},
+      {id:12,name:'Nero Loafer',price:2199,tag:'leather',img:'images/IMG-20251110-WA00020.jpg',desc:'Classic leather loafers for formal settings.'},
+      {id:13,name:'Sky High',price:1899,tag:'sneakers',img:'images/IMG-20251110-WA00021.jpg',desc:'Bold midsole and premium cushioning.'},
+      {id:14,name:'Trailblaze',price:1299,tag:'sport',img:'images/IMG-20251110-WA00022.jpg',desc:'Rugged sole for outdoor adventures.'},
+      {id:15,name:'Velvet Step',price:1799,tag:'leather',img:'images/IMG-20251110-WA00023.jpg',desc:'Soft lining for everyday comfort.'},
+      {id:16,name:'Urban Glide',price:1599,tag:'sneakers',img:'images/IMG-20251110-WA00024.jpg',desc:'Sleek silhouette for city life.'},
+      {id:17,name:'Sprint Pro',price:1399,tag:'sport',img:'https:images/IMG-20251110-WA00025.jpg',desc:'Engineered for speed.'},
+      {id:18,name:'Classic Oxford',price:2499,tag:'leather',img:'images/IMG-20251110-WA00026.jpg0',desc:'Timeless craftsmanship.'},
+      {id:19,name:'Comfy Slip',price:999,tag:'sneakers',img:'images/IMG-20251110-WA00027.jpg',desc:'Slip-on convenience with arch support.'}
+      {id:20,name:'Comfy Slip',price:999,tag:'sneakers',img:'images/IMG-20251110-WA00028.jpg',desc:'Slip-on convenience with arch support.'}
+
+     {id:21,name:'Carbon Runner',price:1499,tag:'sneakers',img:'images/IMG-20251110-WA00029.jpg',desc:'Lightweight runner with breathable upper.'},
+      {id:22,name:'Nero Loafer',price:2199,tag:'leather',img:'images/IMG-20251110-WA00030.jpg',desc:'Classic leather loafers for formal settings.'}
     ];
 
     let activeFilter = 'all';
@@ -300,4 +323,5 @@
   </script>
 </body>
 </html>
+
 
