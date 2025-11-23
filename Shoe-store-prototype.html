@@ -1,0 +1,71 @@
+<!doctype html>
+}
+
+
+function onSearch(){
+render(getFiltered());
+}
+
+
+function setFilter(tag, el){
+activeFilter = tag;
+document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+el.classList.add('active');
+render(getFiltered());
+}
+
+
+// clear input but keep submitted text shown in a transient banner (per your earlier requirement)
+function clearAndSubmit(){
+const qEl = document.getElementById('q');
+const text = qEl.value.trim();
+if(text) showBanner(`Searched: ${text}`);
+qEl.value = '';
+render(getFiltered());
+}
+
+
+function showBanner(msg){
+const b = document.createElement('div');
+b.textContent = msg;
+b.style.position='fixed';b.style.right='20px';b.style.top='20px';b.style.padding='12px 16px';b.style.background='linear-gradient(90deg,#0b1220,#122033)';b.style.border='1px solid rgba(255,255,255,0.04)';b.style.borderRadius='10px';b.style.zIndex=9999;document.body.appendChild(b);
+setTimeout(()=>b.remove(),2500);
+}
+
+
+// Modal
+const modal = document.getElementById('modal');
+function openModal(id){
+const p = products.find(x=>x.id===id);
+document.getElementById('modalTitle').textContent = p.name;
+document.getElementById('modalPrice').textContent = `R${p.price.toLocaleString()}`;
+document.getElementById('modalDesc').textContent = p.desc;
+document.getElementById('modalImg').style.backgroundImage = `url('${p.img}')`;
+modal.classList.add('open');
+}
+function closeModal(e){
+if(e) e.stopPropagation();
+modal.classList.remove('open');
+}
+
+
+// Cart (simple alert simulation)
+function addToCart(id){
+const p = products.find(x=>x.id===id);
+if(p) showBanner(`${p.name} added to cart`);
+}
+
+
+function subscribe(){
+const v = document.getElementById('subscribe').value.trim();
+if(!v) return showBanner('Enter email to subscribe');
+showBanner('Thanks — we will notify you');
+document.getElementById('subscribe').value = '';
+}
+
+
+// init
+render(products);
+</script>
+</body>
+</html>
