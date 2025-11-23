@@ -1,201 +1,302 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Shoe Store Prototype</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LuxeSteps — Shoes Boutique Prototype</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#ff6b6b;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius:16px;
+      font-family: 'Inter',system-ui,Segoe UI,Roboto,Helvetica,Arial;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071028 0%, #0b1220 60%);color:#e6eef8}
+    a{color:inherit}
 
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #0b0f17;
-        color: white;
+    /* Container */
+    .wrap{max-width:1200px;margin:36px auto;padding:24px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#f8a170);display:grid;place-items:center;font-weight:800;color:#081224}
+    .brand h1{margin:0;font-size:20px;letter-spacing:0.6px}
+    nav{display:flex;gap:12px;align-items:center}
+    .nav-btn{padding:10px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+
+    /* Search / hero */
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:28px}
+    .panel{background:linear-gradient(180deg,var(--glass),var(--glass-2));padding:22px;border-radius:var(--radius);box-shadow:0 6px 20px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .hero-left h2{margin:0;font-size:28px}
+    .sub{color:var(--muted);margin-top:8px}
+
+    .search-row{display:flex;margin-top:18px;gap:10px}
+    .search{flex:1;padding:12px 14px;border-radius:12px;border:none;background:rgba(255,255,255,0.03);color:inherit}
+    .search:focus{outline:2px solid rgba(255,255,255,0.04)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#ff8f6b);border:none;padding:12px 14px;border-radius:12px;color:#081224;font-weight:700;cursor:pointer}
+
+    /* Filters */
+    .filters{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+    .chip{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);border:1px solid rgba(255,255,255,0.02);cursor:pointer}
+    .chip.active{background:linear-gradient(90deg,#2b2b45,rgba(255,255,255,0.02));color:#fff}
+
+    /* Products */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.03);transition:transform .18s ease,box-shadow .18s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+    .thumb{height:180px;border-radius:12px;background-size:cover;background-position:center;margin-bottom:12px}
+    .meta{display:flex;justify-content:space-between;align-items:center}
+    .price{font-weight:800}
+    .muted{color:var(--muted);font-size:13px}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(2,6,23,0.6),rgba(2,6,23,0.8));padding:40px}
+    .modal.open{display:flex}
+    .modal-card{width:780px;background:linear-gradient(180deg,#071127,#06101b);padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+    .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    /* Footer */
+    footer{margin-top:34px;text-align:center;color:var(--muted);font-size:14px}
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
     }
-    header {
-        padding: 20px;
-        font-size: 28px;
-        font-weight: bold;
-        text-align: center;
-        background: #101622;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+    @media (max-width:640px){
+      .grid{grid-template-columns:1fr}
+      .logo{width:44px;height:44px}
+      .hero-left h2{font-size:20px}
     }
-    .container {
-        padding: 20px;
-        max-width: 1100px;
-        margin: auto;
-    }
-    .searchBar {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-    input {
-        flex: 1;
-        padding: 12px;
-        border-radius: 8px;
-        border: 1px solid #333;
-        background: #151d2b;
-        color: white;
-    }
-    button {
-        padding: 12px 20px;
-        border: none;
-        background: #2b5cff;
-        border-radius: 8px;
-        color: white;
-        cursor: pointer;
-    }
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-        gap: 20px;
-    }
-    .card {
-        background: #121826;
-        padding: 14px;
-        border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.04);
-        cursor: pointer;
-        transition: 0.2s;
-    }
-    .card:hover {
-        transform: translateY(-4px);
-    }
-    .card-img {
-        width: 100%;
-        height: 160px;
-        background-size: cover;
-        border-radius: 10px;
-        background-position: center;
-        margin-bottom: 10px;
-    }
-    .modal {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.7);
-        display: none;
-        justify-content: center;
-        align-items: center;
-    }
-    .modal.open {
-        display: flex;
-    }
-    .modal-content {
-        width: 350px;
-        background: #121826;
-        border-radius: 14px;
-        padding: 20px;
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .modal-img {
-        width: 100%;
-        height: 200px;
-        background-size: cover;
-        border-radius: 12px;
-        margin-bottom: 15px;
-    }
-</style>
+  </style>
 </head>
-
 <body>
-
-<header>Shoe Store Prototype</header>
-
-<div class="container">
-    <div class="searchBar">
-        <input id="q" type="text" placeholder="Search shoes..." oninput="onSearch()" />
-        <button onclick="clearAndSubmit()">Search</button>
-    </div>
-
-    <div id="productGrid" class="grid"></div>
-</div>
-
-<!-- MODAL -->
-<div id="modal" class="modal" onclick="closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <div id="modalImg" class="modal-img"></div>
-        <h2 id="modalTitle"></h2>
-        <p id="modalDesc"></p>
-        <h3 id="modalPrice"></h3>
-        <button onclick="addToCart()">Add to cart</button>
-    </div>
-</div>
-
-<script>
-// PRODUCT DATA
-const products = [
-    { id: 1, name: "Air Runner", price: 1250, img: "https://images.unsplash.com/photo-1606813899093-2d74b6b24e24", desc: "Comfortable running shoes." },
-    { id: 2, name: "Street Classic", price: 980, img: "https://images.unsplash.com/photo-1528701800489-20be3c8f2f33", desc: "Casual all-day sneakers." },
-    { id: 3, name: "Pro Trainer", price: 1450, img: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3b", desc: "Training performance shoes." }
-];
-
-let activeFilter = "";
-let modal = document.getElementById('modal');
-
-// RENDER GRID
-function render(list){
-    const grid = document.getElementById('productGrid');
-    grid.innerHTML = list.map(item => `
-        <div class="card" onclick="openModal(${item.id})">
-            <div class="card-img" style="background-image:url('${item.img}')"></div>
-            <h3>${item.name}</h3>
-            <p>R${item.price}</p>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">LS</div>
+        <div>
+          <h1>LuxeSteps</h1>
+          <div class="muted">Premium shoes — minimal prototype</div>
         </div>
-    `).join('');
-}
+      </div>
 
-render(products);
+      <nav>
+        <button class="nav-btn">Collections</button>
+        <button class="nav-btn">Men</button>
+        <button class="nav-btn">Women</button>
+        <button class="nav-btn">Contact</button>
+      </nav>
+    </header>
 
-// SEARCH FUNCTION
-function getFiltered(){
-    const q = document.getElementById('q').value.trim().toLowerCase();
-    return products.filter(p => p.name.toLowerCase().includes(q));
-}
-function onSearch(){
-    render(getFiltered());
-}
+    <section class="hero">
+      <div class="panel hero-left">
+        <h2>Step into comfort. Style that speaks.</h2>
+        <div class="sub">Curated designer sneakers and classic leather shoes for everyday elegance.</div>
 
-function clearAndSubmit(){
-    const qEl = document.getElementById('q');
-    const val = qEl.value.trim();
-    if(val) showBanner("Searched: " + val);
-    qEl.value = "";
+        <div class="search-row">
+          <input id="q" class="search" type="text" placeholder="Search shoes, e.g. 'sneaker'" oninput="onSearch()">
+          <button class="btn-primary" onclick="clearAndSubmit()">Search</button>
+        </div>
+
+        <div class="filters">
+          <div class="chip active" data-filter="all" onclick="setFilter('all', this)">All</div>
+          <div class="chip" data-filter="sneakers" onclick="setFilter('sneakers', this)">Sneakers</div>
+          <div class="chip" data-filter="leather" onclick="setFilter('leather', this)">Leather</div>
+          <div class="chip" data-filter="sport" onclick="setFilter('sport', this)">Sport</div>
+          <div class="chip" data-filter="sale" onclick="setFilter('sale', this)">Sale</div>
+        </div>
+
+        <div id="results" class="muted" style="margin-top:12px">Showing <span id="count">9</span> results</div>
+
+        <div class="grid" id="grid">
+          <!-- Cards inserted by JS -->
+        </div>
+      </div>
+
+      <aside class="panel">
+        <h3 style="margin:0 0 10px 0">New arrivals</h3>
+        <div class="muted">Handpicked styles — limited stock</div>
+
+        <div style="margin-top:12px">
+          <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
+            <div style="flex:1">
+              <div class="muted">Subscribe for exclusive drops</div>
+              <input id="subscribe" class="search" placeholder="Email address">
+            </div>
+            <button class="btn-primary" onclick="subscribe()">Join</button>
+          </div>
+
+          <div style="margin-top:22px">
+            <div class="muted">Popular</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+              <div style="display:flex;gap:12px;align-items:center">
+                <div style="width:64px;height:64px;border-radius:10px;background:url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80') center/cover"></div>
+                <div>
+                  <div style="font-weight:700">Carbon Runner</div>
+                  <div class="muted">R1,499</div>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:12px;align-items:center">
+                <div style="width:64px;height:64px;border-radius:10px;background:url('https://images.unsplash.com/photo-1528701800489-4760a2b7b1d0?w=800&q=80') center/cover"></div>
+                <div>
+                  <div style="font-weight:700">Nero Loafer</div>
+                  <div class="muted">R2,199</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      © <span id="year"></span> LuxeSteps — Prototype · Built with ❤️
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 style="margin:0">Product</h3>
+        <button onclick="closeModal()" class="nav-btn">Close</button>
+      </div>
+
+      <div class="modal-grid" style="margin-top:12px">
+        <div id="modalImg" style="border-radius:10px;background-size:cover;background-position:center;min-height:260px"></div>
+        <div>
+          <h2 id="modalTitle" style="margin:0">Product name</h2>
+          <div class="muted" id="modalPrice">R0</div>
+          <p class="muted" style="margin-top:12px" id="modalDesc">Description</p>
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <button class="btn-primary" onclick="addToCart()">Add to cart</button>
+            <button class="nav-btn" onclick="closeModal()">Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Demo data
+    const products = [
+      {id:1,name:'Carbon Runner',price:1499,tag:'sneakers',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1400&q=80',desc:'Lightweight runner with breathable upper.'},
+      {id:2,name:'Nero Loafer',price:2199,tag:'leather',img:'https://images.unsplash.com/photo-1528701800489-4760a2b7b1d0?w=1400&q=80',desc:'Classic leather loafers for formal settings.'},
+      {id:3,name:'Sky High',price:1899,tag:'sneakers',img:'https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?w=1400&q=80',desc:'Bold midsole and premium cushioning.'},
+      {id:4,name:'Trailblaze',price:1299,tag:'sport',img:'https://images.unsplash.com/photo-1542293787938-c9e299b8808a?w=1400&q=80',desc:'Rugged sole for outdoor adventures.'},
+      {id:5,name:'Velvet Step',price:1799,tag:'leather',img:'https://images.unsplash.com/photo-1520975910963-8d5a6f5a6e7b?w=1400&q=80',desc:'Soft lining for everyday comfort.'},
+      {id:6,name:'Urban Glide',price:1599,tag:'sneakers',img:'https://images.unsplash.com/photo-1539185441755-769473a23570?w=1400&q=80',desc:'Sleek silhouette for city life.'},
+      {id:7,name:'Sprint Pro',price:1399,tag:'sport',img:'https://images.unsplash.com/photo-1528701800489-4760a2b7b1d0?w=1400&q=80',desc:'Engineered for speed.'},
+      {id:8,name:'Classic Oxford',price:2499,tag:'leather',img:'https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?w=1400&q=80',desc:'Timeless craftsmanship.'},
+      {id:9,name:'Comfy Slip',price:999,tag:'sneakers',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1400&q=80',desc:'Slip-on convenience with arch support.'}
+    ];
+
+    let activeFilter = 'all';
+    const grid = document.getElementById('grid');
+    const count = document.getElementById('count');
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    function render(list){
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.innerHTML = `
+          <div class="thumb" style="background-image:url('${p.img}')"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:700">${p.name}</div>
+              <div class="muted">${p.tag}</div>
+            </div>
+            <div class="price">R${p.price.toLocaleString()}</div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+            <button class="nav-btn" onclick="openModal(${p.id})">View</button>
+            <button class="btn-primary" onclick="addToCart(${p.id})">Buy</button>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+      count.textContent = list.length;
+    }
+
+    function getFiltered(){
+      const q = (document.getElementById('q').value||'').toLowerCase().trim();
+      return products.filter(p=>{
+        const matchFilter = activeFilter === 'all' || p.tag === activeFilter;
+        const matchQ = !q || p.name.toLowerCase().includes(q) || p.tag.toLowerCase().includes(q);
+        return matchFilter && matchQ;
+      });
+    }
+
+    function onSearch(){
+      render(getFiltered());
+    }
+
+    function setFilter(tag, el){
+      activeFilter = tag;
+      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      el.classList.add('active');
+      render(getFiltered());
+    }
+
+    // clear input but keep submitted text shown in a transient banner (per your earlier requirement)
+    function clearAndSubmit(){
+      const qEl = document.getElementById('q');
+      const text = qEl.value.trim();
+      if(text) showBanner(`Searched: ${text}`);
+      qEl.value = '';
+      render(getFiltered());
+    }
+
+    function showBanner(msg){
+      const b = document.createElement('div');
+      b.textContent = msg;
+      b.style.position='fixed';b.style.right='20px';b.style.top='20px';b.style.padding='12px 16px';b.style.background='linear-gradient(90deg,#0b1220,#122033)';b.style.border='1px solid rgba(255,255,255,0.04)';b.style.borderRadius='10px';b.style.zIndex=9999;document.body.appendChild(b);
+      setTimeout(()=>b.remove(),2500);
+    }
+
+    // Modal
+    const modal = document.getElementById('modal');
+    function openModal(id){
+      const p = products.find(x=>x.id===id);
+      document.getElementById('modalTitle').textContent = p.name;
+      document.getElementById('modalPrice').textContent = `R${p.price.toLocaleString()}`;
+      document.getElementById('modalDesc').textContent = p.desc;
+      document.getElementById('modalImg').style.backgroundImage = `url('${p.img}')`;
+      modal.classList.add('open');
+    }
+    function closeModal(e){
+      if(e) e.stopPropagation();
+      modal.classList.remove('open');
+    }
+
+    // Cart (simple alert simulation)
+    function addToCart(id){
+      const p = products.find(x=>x.id===id);
+      if(p) showBanner(`${p.name} added to cart`);
+    }
+
+    function subscribe(){
+      const v = document.getElementById('subscribe').value.trim();
+      if(!v) return showBanner('Enter email to subscribe');
+      showBanner('Thanks — we will notify you');
+      document.getElementById('subscribe').value = '';
+    }
+
+    // init
     render(products);
-}
-
-// BANNER
-function showBanner(msg){
-    const b = document.createElement('div');
-    b.textContent = msg;
-    b.style.position = "fixed";
-    b.style.top = "20px";
-    b.style.right = "20px";
-    b.style.padding = "12px 16px";
-    b.style.background = "#122033";
-    b.style.border = "1px solid rgba(255,255,255,0.1)";
-    b.style.borderRadius = "10px";
-    b.style.zIndex = 9999;
-    document.body.appendChild(b);
-    setTimeout(()=>b.remove(), 2500);
-}
-
-// MODAL FUNCTIONS
-function openModal(id){
-    const p = products.find(x => x.id === id);
-    document.getElementById("modalTitle").textContent = p.name;
-    document.getElementById("modalPrice").textContent = "R" + p.price;
-    document.getElementById("modalDesc").textContent = p.desc;
-    document.getElementById("modalImg").style.backgroundImage = `url('${p.img}')`;
-    modal.classList.add("open");
-}
-function closeModal(){ modal.classList.remove("open"); }
-
-// CART SIMULATION
-function addToCart(){
-    showBanner("Added to cart");
-}
-</script>
-
+  </script>
 </body>
 </html>
